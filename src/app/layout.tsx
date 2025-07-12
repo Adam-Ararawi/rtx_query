@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ReduxProvider } from "./components/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,16 +20,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen text-gray-900`}
       >
-        {children}
+        <ReduxProvider>
+          <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {children}
+          </main>
+        </ReduxProvider>
       </body>
     </html>
   );
 }
+
